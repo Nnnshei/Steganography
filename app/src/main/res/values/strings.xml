@@ -3,8 +3,7 @@
     <string name="preferences_name">UserPrefs</string>
     <string name="user_database_name">UsersDatabase</string>
 
-    <string name="title_activity_login">LoginActivity</string>
-    <string name="title_activity_main">MainActivity</string>
+    <string name="title_activity_login">Вход</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="nav_header_title">Android Studio</string>
@@ -18,8 +17,10 @@
 
     <string name="home_second">Home Second</string>
     <!-- Strings used for fragments for navigation -->
-    <string name="first_fragment_label">First Fragment</string>
-    <string name="second_fragment_label">Second Fragment</string>
+    <string name="login_fragment_label">Login Fragment</string>
+    <string name="settings_fragment_label">Settings Fragment</string>
+    <string name="material_fragment_label">Material Fragment</string>
+    <string name="materials_list_fragment_label">Materials List Fragment</string>
     <string name="next">Next</string>
     <string name="previous">Previous</string>
 

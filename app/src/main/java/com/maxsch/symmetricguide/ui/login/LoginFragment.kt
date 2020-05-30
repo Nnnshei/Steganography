@@ -29,10 +29,14 @@ class LoginFragment : MvpAppCompatFragment(R.layout.fragment_login), LoginView {
                 loginPasswordEditText.text.toString()
             )
         }
+
+        loginRegisterButton.setOnClickListener {
+            openRegisterScreen()
+        }
     }
 
     override fun openMaterialsListScreen() {
-        findNavController().navigate(R.id.action_loginFragment_to_nav_graph2)
+        findNavController().navigate(R.id.action_loginFragment_to_MaterialsFragment)
     }
 
     override fun showContent() {
@@ -45,5 +49,9 @@ class LoginFragment : MvpAppCompatFragment(R.layout.fragment_login), LoginView {
             Snackbar.make(it, "Replace with your own action", Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show()
         }
+    }
+
+    private fun openRegisterScreen() {
+        findNavController().navigate(R.id.action_loginFragment_to_registerFragment2)
     }
 }

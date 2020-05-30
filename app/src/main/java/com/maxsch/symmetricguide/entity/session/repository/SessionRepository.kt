@@ -9,4 +9,6 @@ interface SessionRepository {
     fun saveSession(username: String, password: String): Completable
 
     fun getActiveSession(): Single<Session>
+
+    fun clearSession(): Single<Unit>
 }

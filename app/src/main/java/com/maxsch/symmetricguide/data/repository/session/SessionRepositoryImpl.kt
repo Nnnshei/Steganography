@@ -23,4 +23,9 @@ class SessionRepositoryImpl(
         Single.fromCallable {
             dataSource.session
         }
+
+    override fun clearSession(): Single<Unit> =
+        Single.fromCallable {
+            dataSource.session = null
+        }
 }

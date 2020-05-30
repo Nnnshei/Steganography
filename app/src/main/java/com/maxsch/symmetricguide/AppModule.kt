@@ -11,6 +11,8 @@ import com.maxsch.symmetricguide.data.repository.user.UserRepositoryImpl
 import com.maxsch.symmetricguide.entity.session.repository.SessionRepository
 import com.maxsch.symmetricguide.entity.user.repository.UserRepository
 import com.maxsch.symmetricguide.presentation.login.LoginPresenter
+import com.maxsch.symmetricguide.presentation.register.RegisterPresenter
+import com.maxsch.symmetricguide.presentation.settings.SettingsPresenter
 import org.koin.android.ext.koin.androidApplication
 import org.koin.android.ext.koin.androidContext
 import org.koin.dsl.module
@@ -27,7 +29,7 @@ val appModule = module {
             androidApplication(),
             UserDatabase::class.java,
             androidContext().getString(R.string.user_database_name)
-        ).build()
+        ).fallbackToDestructiveMigration().build()
     }
     single { get<UserDatabase>().userDao() }
     single { SessionDataSource(get()) }
@@ -35,4 +37,6 @@ val appModule = module {
     single<SessionRepository> { SessionRepositoryImpl(get()) }
     single<UserRepository> { UserRepositoryImpl(get()) }
     single { LoginPresenter(get(), get()) }
+    single { SettingsPresenter(get()) }
+    single { RegisterPresenter(get(), get()) }
 }
