@@ -36,7 +36,7 @@ class LoginFragment : MvpAppCompatFragment(R.layout.fragment_login), LoginView {
     }
 
     override fun openMaterialsListScreen() {
-        findNavController().navigate(R.id.action_loginFragment_to_MaterialsFragment)
+//        findNavController().navigate(R.id.action_loginFragment_to_MaterialsFragment)
     }
 
     override fun showContent() {
