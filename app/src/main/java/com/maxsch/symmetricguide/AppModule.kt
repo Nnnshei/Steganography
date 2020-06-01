@@ -3,7 +3,6 @@ package com.maxsch.symmetricguide
 import android.content.Context
 import android.content.SharedPreferences
 import androidx.room.Room
-import com.maxsch.symmetricguide.data.datasource.material.MaterialDataSource
 import com.maxsch.symmetricguide.data.datasource.session.SessionDataSource
 import com.maxsch.symmetricguide.data.datasource.user.UserDatabase
 import com.maxsch.symmetricguide.data.repository.session.SessionRepositoryImpl
@@ -33,7 +32,6 @@ val appModule = module {
     }
     single { get<UserDatabase>().userDao() }
     single { SessionDataSource(get()) }
-    single { MaterialDataSource() }
     single<SessionRepository> { SessionRepositoryImpl(get()) }
     single<UserRepository> { UserRepositoryImpl(get()) }
     single { LoginPresenter(get(), get()) }

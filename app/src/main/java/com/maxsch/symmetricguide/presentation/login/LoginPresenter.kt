@@ -22,10 +22,9 @@ class LoginPresenter(
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
-                proceedToMaterialsList()
+                proceedToSteganography()
             }, {
                 Log.e("${this::class}", "$it")
-                viewState.showContent()
             })
             .untilDestroy()
     }
@@ -41,7 +40,7 @@ class LoginPresenter(
                     Completable.error(Throwable("User not found"))
             }
             .subscribe({
-                proceedToMaterialsList()
+                proceedToSteganography()
             }, {
                 Log.e("${this::class}", "$it")
                 viewState.showError()
@@ -49,7 +48,7 @@ class LoginPresenter(
             .untilDestroy()
     }
 
-    private fun proceedToMaterialsList() {
-        viewState.openMaterialsListScreen()
+    private fun proceedToSteganography() {
+        viewState.openMenuScreen()
     }
 }

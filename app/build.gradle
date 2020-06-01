@@ -51,6 +51,7 @@ dependencies {
     implementation 'androidx.navigation:navigation-fragment-ktx:2.2.2'
     implementation 'androidx.navigation:navigation-ui-ktx:2.2.2'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation 'com.github.aagarwal1012:Image-Steganography-Library-Android:v1.1'
     kapt "androidx.room:room-compiler:$room_version"
     // For Kotlin use kapt instead of annotationProcessor
 

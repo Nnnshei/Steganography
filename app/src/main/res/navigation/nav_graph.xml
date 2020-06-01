@@ -27,9 +27,38 @@
             app:exitAnim="@anim/nav_default_exit_anim"
             app:popEnterAnim="@anim/nav_default_pop_enter_anim"
             app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+        <action
+            android:id="@+id/action_loginFragment_to_menuFragment"
+            app:destination="@id/menuFragment" />
     </fragment>
     <fragment
         android:id="@+id/registerFragment"
         android:name="com.maxsch.symmetricguide.ui.register.RegisterFragment"
-        android:label="@string/login_register"/>
+        android:label="@string/login_register">
+        <action
+            android:id="@+id/action_registerFragment_to_menuFragment"
+            app:destination="@id/menuFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/menuFragment"
+        android:name="com.maxsch.symmetricguide.ui.menu.MenuFragment"
+        android:label="MenuFragment" >
+        <action
+            android:id="@+id/action_menuFragment_to_SettingsFragment"
+            app:destination="@id/SettingsFragment" />
+        <action
+            android:id="@+id/action_menuFragment_to_encodingFragment2"
+            app:destination="@id/encodingFragment2" />
+        <action
+            android:id="@+id/action_menuFragment_to_decodingFragment"
+            app:destination="@id/decodingFragment" />
+    </fragment>
+    <activity
+        android:id="@+id/encodingFragment2"
+        android:name="com.maxsch.symmetricguide.ui.encoding.EncodingFragment"
+        android:label="EncodingFragment" />
+    <activity
+        android:id="@+id/decodingFragment"
+        android:name="com.maxsch.symmetricguide.ui.decoding.DecodingFragment"
+        android:label="DecodingFragment" />
 </navigation>

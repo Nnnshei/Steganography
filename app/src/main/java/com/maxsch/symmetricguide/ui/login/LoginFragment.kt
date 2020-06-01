@@ -2,7 +2,6 @@ package com.maxsch.symmetricguide.ui.login
 
 import android.os.Bundle
 import android.view.View
-import androidx.core.view.isVisible
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
 import com.maxsch.symmetricguide.R
@@ -22,12 +21,12 @@ class LoginFragment : MvpAppCompatFragment(R.layout.fragment_login), LoginView {
     fun providePresenter() = get<LoginPresenter>()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        loginButton.setOnClickListener {
-            presenter.login(
-                loginUsernameEditText.text.toString(),
-                loginPasswordEditText.text.toString()
-            )
+                super.onViewCreated(view, savedInstanceState)
+                loginButton.setOnClickListener {
+                    presenter.login(
+                        loginUsernameEditText.text.toString(),
+                        loginPasswordEditText.text.toString()
+                    )
         }
 
         loginRegisterButton.setOnClickListener {
@@ -35,13 +34,8 @@ class LoginFragment : MvpAppCompatFragment(R.layout.fragment_login), LoginView {
         }
     }
 
-    override fun openMaterialsListScreen() {
-//        findNavController().navigate(R.id.action_loginFragment_to_MaterialsFragment)
-    }
-
-    override fun showContent() {
-        progressBar.isVisible = false
-        loginContentGroup.isVisible = true
+    override fun openMenuScreen() {
+        findNavController().navigate(R.id.action_loginFragment_to_menuFragment)
     }
 
     override fun showError() {

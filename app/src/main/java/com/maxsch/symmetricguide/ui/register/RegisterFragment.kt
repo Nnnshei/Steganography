@@ -27,6 +27,6 @@ class RegisterFragment : MvpAppCompatFragment(R.layout.fragment_register), Regis
     }
 
     override fun login() {
-//        findNavController().navigate(R.id.action_registerFragment_to_MaterialsFragment)
+        findNavController().navigate(R.id.action_registerFragment_to_menuFragment)
     }
 }
