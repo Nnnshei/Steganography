@@ -17,6 +17,7 @@ import com.ayush.imagesteganographylibrary.Text.ImageSteganography
 import com.ayush.imagesteganographylibrary.Text.TextEncoding
 import com.maxsch.symmetricguide.R
 import io.reactivex.Single
+import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.fragment_encoding.*
@@ -29,7 +30,7 @@ class EncodingFragment : MvpAppCompatActivity(R.layout.fragment_encoding), TextE
 
     private val SELECT_PICTURE = 100
     private val TAG = "EncodingFragment class"
-    private lateinit var filepath: Uri
+    private var filepath: Uri? = null
     private lateinit var textEncoding: TextEncoding
     private lateinit var imageSteganography: ImageSteganography
     private lateinit var originalImage: Bitmap
@@ -42,16 +43,22 @@ class EncodingFragment : MvpAppCompatActivity(R.layout.fragment_encoding), TextE
         btnRandomizeKey.setOnClickListener { randomizeKey() }
         btnChooseImage.setOnClickListener { imageChooser() }
         btnEncode.setOnClickListener {
+            var textToEncode: String = imageMessage.text.toString()
             if (filepath != null) {
-                if (imageMessage.text.toString() != null) {
-                    imageSteganography = ImageSteganography(
-                        imageMessage.text.toString(),
-                        secretKey.text.toString(),
-                        originalImage
-                    )
-                    textEncoding = TextEncoding(this, this)
-                    textEncoding.execute(imageSteganography)
+                if (imageMessage.text.toString().endsWith(".pbm")) {
+                    try {
+                        textToEncode = getPbmFile(imageMessage.text.toString())
+                    } catch (error: FileNotFoundException) {
+                        Toast.makeText(this, "Такого файла нет", Toast.LENGTH_SHORT).show()
+                    }
                 }
+                imageSteganography = ImageSteganography(
+                    textToEncode,
+                    secretKey.text.toString(),
+                    originalImage
+                )
+                textEncoding = TextEncoding(this, this)
+                textEncoding.execute(imageSteganography)
             }
         }
         btnSaveImage.setOnClickListener {
@@ -59,7 +66,9 @@ class EncodingFragment : MvpAppCompatActivity(R.layout.fragment_encoding), TextE
             disposable = Single.fromCallable {
                 saveToInternalStorage(imgToSave)
             }
-                .subscribeOn(Schedulers.io()).subscribe({
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({
                     Toast.makeText(this, "Сохранено", Toast.LENGTH_LONG).show()
                 }, {})
         }
@@ -73,9 +82,9 @@ class EncodingFragment : MvpAppCompatActivity(R.layout.fragment_encoding), TextE
 
 
     fun imageChooser() {
-        var intent = Intent()
-        intent.setType("image/*")
-        intent.setAction(Intent.ACTION_GET_CONTENT)
+        val intent = Intent()
+        intent.type = "image/*"
+        intent.action = Intent.ACTION_GET_CONTENT
         startActivityForResult(Intent.createChooser(intent, "Выберите изображение"), SELECT_PICTURE)
     }
 
@@ -149,8 +158,14 @@ class EncodingFragment : MvpAppCompatActivity(R.layout.fragment_encoding), TextE
         }
     }
 
-    fun randomizeKey(){
-        secretKey.setText(Random.nextInt(0,99999).toString())
+    fun randomizeKey() {
+        secretKey.setText(Random.nextInt(0, 99999).toString())
     }
 }
 
+fun getPbmFile(file: String): String =
+    FileInputStream(
+        Environment.getExternalStorageDirectory().toString() + "/Download/" + "$file"
+    ).use {
+        return it.readBytes().toString(Charsets.US_ASCII)
+    }

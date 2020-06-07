@@ -7,15 +7,15 @@ import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
 import android.widget.Toast
+import androidx.core.view.isVisible
 import com.ayush.imagesteganographylibrary.Text.AsyncTaskCallback.TextDecodingCallback
 import com.ayush.imagesteganographylibrary.Text.ImageSteganography
 import com.ayush.imagesteganographylibrary.Text.TextDecoding
 import com.maxsch.symmetricguide.R
+import com.maxsch.symmetricguide.entity.PbmImage.Companion.toPbm
 import kotlinx.android.synthetic.main.fragment_decoding.*
-import kotlinx.android.synthetic.main.fragment_decoding.btnChooseImage
 import moxy.MvpAppCompatActivity
 import java.io.IOException
-import kotlin.random.Random
 
 class DecodingFragment : MvpAppCompatActivity(R.layout.fragment_decoding), TextDecodingCallback {
 
@@ -46,7 +46,7 @@ class DecodingFragment : MvpAppCompatActivity(R.layout.fragment_decoding), TextD
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == SELECT_PICTURE && resultCode == MvpAppCompatActivity.RESULT_OK && data != null && data.data != null) {
+        if (requestCode == SELECT_PICTURE && resultCode == RESULT_OK && data != null && data.data != null) {
             filepath = data.data!!
             try {
                 originalImage =
@@ -69,7 +69,14 @@ class DecodingFragment : MvpAppCompatActivity(R.layout.fragment_decoding), TextD
             else {
                 if (!result.isSecretKeyWrong) {
                     Toast.makeText(this, "Расшифровано", Toast.LENGTH_LONG).show()
-                    messageDecode.setText("" + result.message)
+                    if (result.message.contains("P1\n#")) {
+                        val pbm = result.message.toPbm()
+                        srcImageDecoding.isVisible = true
+                        srcImageDecoding.setImageBitmap(pbm.toBitmap())
+                    } else {
+                        messageDecode.text = "" + result.message
+                        messageDecode.isVisible = true
+                    }
                 } else {
                     Toast.makeText(this, "Неверный ключ", Toast.LENGTH_LONG).show()
                 }

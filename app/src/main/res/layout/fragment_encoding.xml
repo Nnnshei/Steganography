@@ -17,9 +17,9 @@
     <EditText
         android:id="@+id/imageMessage"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_margin="50dp"
-        android:hint="Введите сообщение"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:hint="Введите сообщение, или название файла"
         app:layout_constraintBottom_toTopOf="@id/secretKey"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -28,7 +28,7 @@
         android:id="@+id/secretKey"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_margin="50dp"
+        android:layout_margin="16dp"
         android:hint="Введите секретный ключ"
         app:layout_constraintBottom_toTopOf="@id/btnChooseImage"
         app:layout_constraintEnd_toEndOf="parent"
