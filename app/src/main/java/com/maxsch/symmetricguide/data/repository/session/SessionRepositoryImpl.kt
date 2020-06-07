@@ -28,4 +28,13 @@ class SessionRepositoryImpl(
         Single.fromCallable {
             dataSource.session = null
         }
+
+    override fun changePin(pin: String): Completable = Completable.fromAction {
+        dataSource.pin = pin
+    }
+
+    override fun getPin(): Single<String> =
+        Single.fromCallable {
+            dataSource.pin
+        }
 }

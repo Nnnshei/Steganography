@@ -10,6 +10,7 @@ class SessionDataSource(
     private companion object {
         const val USERNAME_KEY = "username_key"
         const val PASSWORD_KEY = "password_key"
+        const val PIN_KEY = "pin_key"
     }
 
     var session: Session?
@@ -28,6 +29,17 @@ class SessionDataSource(
             prefs.edit().apply {
                 putString(USERNAME_KEY, value?.username)
                 putString(PASSWORD_KEY, value?.password)
+                apply()
+            }
+        }
+
+    var pin: String?
+        get() {
+            return prefs.getString(PIN_KEY, null)
+        }
+        set(value) {
+            prefs.edit().apply {
+                putString(PIN_KEY, value)
                 apply()
             }
         }

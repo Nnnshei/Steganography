@@ -34,8 +34,8 @@ class LoginFragment : MvpAppCompatFragment(R.layout.fragment_login), LoginView {
         }
     }
 
-    override fun openMenuScreen() {
-        findNavController().navigate(R.id.action_loginFragment_to_menuFragment)
+    override fun openPincodeScreen() {
+        findNavController().navigate(R.id.action_loginFragment_to_сheckPincodeFragment)
     }
 
     override fun showError() {

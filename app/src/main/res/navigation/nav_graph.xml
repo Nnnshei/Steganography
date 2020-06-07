@@ -28,8 +28,8 @@
             app:popEnterAnim="@anim/nav_default_pop_enter_anim"
             app:popExitAnim="@anim/nav_default_pop_exit_anim" />
         <action
-            android:id="@+id/action_loginFragment_to_menuFragment"
-            app:destination="@id/menuFragment" />
+            android:id="@+id/action_loginFragment_to_сheckPincodeFragment"
+            app:destination="@id/сheckPincodeFragment" />
     </fragment>
     <fragment
         android:id="@+id/registerFragment"
@@ -61,4 +61,12 @@
         android:id="@+id/decodingFragment"
         android:name="com.maxsch.symmetricguide.ui.decoding.DecodingFragment"
         android:label="DecodingFragment" />
+    <fragment
+        android:id="@+id/сheckPincodeFragment"
+        android:name="com.maxsch.symmetricguide.ui.pincode.CheckPincodeFragment"
+        android:label="СheckPincodeFragment">
+        <action
+            android:id="@+id/action_сheckPincodeFragment_to_menuFragment"
+            app:destination="@id/menuFragment" />
+    </fragment>
 </navigation>

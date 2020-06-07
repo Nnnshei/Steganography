@@ -49,6 +49,6 @@ class LoginPresenter(
     }
 
     private fun proceedToSteganography() {
-        viewState.openMenuScreen()
+        viewState.openPincodeScreen()
     }
 }

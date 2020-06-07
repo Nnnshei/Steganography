@@ -7,7 +7,7 @@ interface LoginView : MvpView {
 
 
     @Skip
-    fun openMenuScreen()
+    fun openPincodeScreen()
 
     @Skip
     fun showError()

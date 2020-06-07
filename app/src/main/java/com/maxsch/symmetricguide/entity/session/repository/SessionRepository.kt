@@ -11,4 +11,8 @@ interface SessionRepository {
     fun getActiveSession(): Single<Session>
 
     fun clearSession(): Single<Unit>
+
+    fun changePin(pin: String): Completable
+
+    fun getPin(): Single<String>
 }
